@@ -172,8 +172,8 @@ public class FailSafeClaimPopulator {
             log.info("Missing claim dialects  : " + claimDialectsFromFile.size());
             log.info("Missing external claims : " + externalClaimsFromFile.size());
 
-            if (localClaimsFromFile.size() > 0 | claimDialectsFromFile.size() > 0
-                    | externalClaimsFromFile.size() > 0 ) {
+            if (localClaimsFromFile.size() > 0 || claimDialectsFromFile.size() > 0
+                    || externalClaimsFromFile.size() > 0 ) {
                 log.info("Adding missing claims");
                 addLocalClaims(localClaimsFromFile, tenantId);
                 addClaimDialects(claimDialectsFromFile, tenantId);
