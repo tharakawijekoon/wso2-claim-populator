@@ -187,9 +187,11 @@ public class FailSafeClaimPopulator {
         for(LocalClaim localClaim : localClaims) {
             try {
                 localClaimDAO.addLocalClaim(localClaim, tenantId);
+                if (log.isDebugEnabled()) {
+                    log.debug("Missing claim " + localClaim.getClaimURI() + " added successfully");
+                }
             } catch (ClaimMetadataException e) {
                 log.error("Error while adding missing local claim :" + localClaim.getClaimURI(), e);
-                continue;
             }
         }
     }
@@ -198,9 +200,11 @@ public class FailSafeClaimPopulator {
         for(ClaimDialect claimDialect : claimDialects) {
             try {
                 claimDialectDAO.addClaimDialect(claimDialect, tenantId);
+                if (log.isDebugEnabled()) {
+                    log.debug("Missing claim dialect " + claimDialect.getClaimDialectURI() + " added successfully");
+                }
             } catch (ClaimMetadataException e) {
-                log.error("Error while adding missing claim dialect :" + claimDialect.getClaimDialectURI(), e);
-                continue;
+                log.error("Error while adding missing claim dialect : " + claimDialect.getClaimDialectURI(), e);
             }
         }
     }
@@ -209,8 +213,12 @@ public class FailSafeClaimPopulator {
         for(ExternalClaim externalClaim : externalClaims) {
             try {
                 externalClaimDAO.addExternalClaim(externalClaim, tenantId);
+                if (log.isDebugEnabled()) {
+                    log.debug("Missing external claim " + externalClaim.getClaimURI() + " in dialect "
+                            + externalClaim.getClaimDialectURI() + " added successfully");
+                }
             } catch (ClaimMetadataException e) {
-                log.error("Error while adding missing external claim " + externalClaim.getClaimURI() + " to dialect "
+                log.error("Error while adding missing external claim : " + externalClaim.getClaimURI() + " to dialect : "
                                 + externalClaim.getClaimDialectURI(), e);
             }
         }
